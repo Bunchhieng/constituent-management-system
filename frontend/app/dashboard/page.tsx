@@ -456,11 +456,35 @@ export default function Dashboard() {
 		setSortOrder(sortOrder === "asc" ? "desc" : "asc");
 	};
 
-	const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
 		if (file) {
-			console.log("File uploaded:", file.name);
-			alert("CSV upload functionality would be implemented here.");
+			try {
+				const formData = new FormData();
+				formData.append("file", file);
+
+				const response = await fetch(
+					`${process.env.NEXT_PUBLIC_SERVER_URL}/constituents/upload`,
+					{
+						method: "POST",
+						body: formData,
+						headers: {
+							Authorization: `Bearer ${localStorage.getItem("token")}`,
+						},
+					},
+				);
+
+				if (!response.ok) {
+					throw new Error("Upload failed");
+				}
+
+				const result = await response.json();
+				toast.success(result.message);
+				fetchConstituents(); // Refresh the constituents list
+			} catch (error) {
+				console.error("Error uploading file:", error);
+				toast.error("Failed to upload CSV file");
+			}
 		}
 	};
 
