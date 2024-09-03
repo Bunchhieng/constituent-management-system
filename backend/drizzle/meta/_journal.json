@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1725336005097,
-      "tag": "0000_shocking_proteus",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1725338156980,
-      "tag": "0001_watery_inertia",
+      "when": 1725338978869,
+      "tag": "0000_bumpy_shooting_star",
       "breakpoints": true
     }
   ]
