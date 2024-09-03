@@ -1,0 +1,1 @@
+ALTER TABLE "constituents"."issues" ADD COLUMN "count" integer DEFAULT 0 NOT NULL;
